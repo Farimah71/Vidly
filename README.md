@@ -1,5 +1,2 @@
 # Vidly
 
-## video app
-
-
