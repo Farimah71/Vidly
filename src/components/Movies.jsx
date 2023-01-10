@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
 import Filter from "./common/filter";
-import Like from "./common/Like";
+import MoviesTable from "./moviesTable";
 import Pagination from "./common/Pagination";
-import { Paginate } from "./utils/paginate";
+import { Paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
@@ -53,6 +53,7 @@ class Movies extends Component {
       genres,
       selectedGenre,
       movies: allMovies,
+      tbHeadings,
     } = this.state;
 
     if (count === 0) return <p>There is no movies in the database!</p>;
@@ -79,40 +80,12 @@ class Movies extends Component {
           <div className="col-8">
             <p>Showing {filteredMovies.length} movies from the database:</p>
             <div className="card" style={{ overflow: "hidden" }}>
-              <table className="table table-dark table-striped table-hover m-0">
-                <thead>
-                  <tr>
-                    {this.state.tbHeadings.map((tbHeading) => (
-                      <th key={tbHeading}>{tbHeading}</th>
-                    ))}
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {movies.map((movie) => (
-                    <tr key={movie._id}>
-                      <td>{movie.genre.name}</td>
-                      <td>{movie.numberInStock}</td>
-                      <td>{movie.dailyRentalRate}</td>
-                      <td>
-                        <Like
-                          liked={movie.liked}
-                          onLiked={() => this.handleLike(movie)}
-                          movie={movie}
-                        />
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => this.handleDelete(movie)}
-                          className="btn btn-danger btn-sm"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <MoviesTable
+                tbHeadings={tbHeadings}
+                movies={movies}
+                onLike={this.handleLike}
+                onDelete={this.handleDelete}
+              />
             </div>
             <br />
             <Pagination
