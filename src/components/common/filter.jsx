@@ -1,35 +1,26 @@
 import React from "react";
 
 const Filter = (props) => {
-  const {
-    items,
-    itemsName,
-    textProperty,
-    valueProperty,
-    onSelectFilter,
-    selectedFilter,
-  } = props;
+  const { items, textProperty, valueProperty, onSelectFilter, selectedFilter } =
+    props;
 
   return (
     <ul className="list-group">
-      <li
-        className="list-group-item list-group-item-action"
-        onClick={() => onSelectFilter(itemsName)}
-        style={{ background: "#323539", color: "white", cursor: "pointer" }}
-      >
-        {itemsName}
-      </li>
-
       {items.map((item) => (
         <li
           key={item[valueProperty]}
           onClick={() => onSelectFilter(item)}
           className={
-            (item === selectedFilter)
+            item === selectedFilter
               ? "list-group-item list-group-item-action active"
               : "list-group-item list-group-item-action"
           }
-          style={{ cursor: "pointer" }}
+          style={{
+            cursor: "pointer",
+            backgroundColor:
+              item[textProperty] === "All Genres" ? "#323539" : "",
+            color: item[textProperty] === "All Genres" ? "white" : "",
+          }}
         >
           {item[textProperty]}
         </li>

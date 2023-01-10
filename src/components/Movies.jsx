@@ -9,17 +9,18 @@ import { Paginate } from "./utils/paginate";
 class Movies extends Component {
   state = {
     movies: [],
-    Genres: [],
-    filterTitle: "Genres",
-    tbHeadings: ["Title", "Genre", "Stock", "Rate", "Like", ""],
+    genres: [],
+    tbHeadings: ["Genre", "Stock", "Rate", "Like", ""],
     pageSize: 4,
     currentPage: 1,
   };
 
   componentDidMount = () => {
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+
     this.setState({
       movies: getMovies(),
-      Genres: getGenres(),
+      genres,
     });
   };
 
@@ -41,7 +42,7 @@ class Movies extends Component {
   };
 
   handleSelectFilter = (item) => {
-    this.setState({ selectedGenre: item });
+    this.setState({ selectedGenre: item, currentPage: 1 });
   };
 
   render() {
@@ -49,17 +50,17 @@ class Movies extends Component {
     const {
       pageSize,
       currentPage,
-      Genres,
+      genres,
       selectedGenre,
-      filterTitle,
       movies: allMovies,
     } = this.state;
 
     if (count === 0) return <p>There is no movies in the database!</p>;
 
-    const filteredMovies = selectedGenre
-      ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-      : allMovies;
+    const filteredMovies =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+        : allMovies;
 
     const movies = Paginate(filteredMovies, currentPage, pageSize);
 
@@ -70,8 +71,7 @@ class Movies extends Component {
             <br />
             <br />
             <Filter
-              items={Genres}
-              itemsName={filterTitle}
+              items={genres}
               selectedFilter={this.state.selectedGenre}
               onSelectFilter={this.handleSelectFilter}
             />
@@ -91,7 +91,6 @@ class Movies extends Component {
                 <tbody>
                   {movies.map((movie) => (
                     <tr key={movie._id}>
-                      <td>{movie.title}</td>
                       <td>{movie.genre.name}</td>
                       <td>{movie.numberInStock}</td>
                       <td>{movie.dailyRentalRate}</td>
