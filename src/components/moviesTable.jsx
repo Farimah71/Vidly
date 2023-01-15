@@ -2,20 +2,24 @@ import React from "react";
 import Like from "./common/Like";
 
 const MoviesTable = (props) => {
-  const { tbHeadings, movies, onLike, onDelete } = props;
+  const { movies, onLike, onDelete, onSort } = props;
   return (
     <table className="table table-dark table-striped table-hover m-0">
       <thead>
-        <tr>
-          {tbHeadings.map((tbHeading) => (
-            <th key={tbHeading}>{tbHeading}</th>
-          ))}
+        <tr style={{ cursor: "pointer" }}>
+          <th onClick={() => onSort("title")}>Title</th>
+          <th onClick={() => onSort("genre.name")}>Genre</th>
+          <th onClick={() => onSort("numberInStock")}>Stock</th>
+          <th onClick={() => onSort("dailyRentalRate")}>Rate</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
         {movies.map((movie) => (
           <tr key={movie._id}>
+            <td>{movie.title}</td>
             <td>{movie.genre.name}</td>
             <td>{movie.numberInStock}</td>
             <td>{movie.dailyRentalRate}</td>
