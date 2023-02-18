@@ -7,12 +7,16 @@ import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import MoviesForm from "./components/moviesForm";
 import LoginForm from "./components/loginForm";
+import Teaser from "./components/teaser";
 import "./App.css";
 
 function App() {
   return (
     <React.Fragment>
       <Navbar />
+      <Routes>
+        <Route path="/movies" element={<Teaser />} />
+      </Routes>
       <main className="container">
         <Routes>
           <Route path="/login" element={<LoginForm />} />
