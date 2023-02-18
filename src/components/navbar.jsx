@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4 p-2">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 ps-5">
       <Link className="navbar-brand" to="/">
         Vidly
       </Link>

@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: 20px;
 }
 
 code {
@@ -15,4 +14,18 @@ code {
 
 .clickable {
   cursor: pointer;
+}
+
+#movieName-link {
+  text-decoration: none;
+  color: white;
+  text-shadow: 2px 2px 2px rgb(13, 13, 13);
+}
+
+#movieName-link:hover {
+  text-shadow: 2px 2px 2px rgb(241, 14, 14);
+}
+
+.navbar {
+  margin: 0 0 20px 0;
 }
