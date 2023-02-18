@@ -6,6 +6,7 @@ import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import MoviesForm from "./components/moviesForm";
+import LoginForm from "./components/loginForm";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <main className="container">
         <Routes>
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/movies/:id" element={<MoviesForm />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/customers" element={<Customers />} />
