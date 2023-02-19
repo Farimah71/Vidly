@@ -24,13 +24,14 @@ const Navbar = () => {
               Rentals
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/login">
-              Login
-            </NavLink>
-          </li>
+          <li className="nav-item"></li>
         </ul>
       </div>
+      <span className="navbar-text">
+        <NavLink className="nav-link" to="/login">
+          <button className="login">Login</button>
+        </NavLink>
+      </span>
     </nav>
   );
 };

@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+.navbar {
+  background: linear-gradient(to left,rgba(0, 0, 0,0.5), rgba(255, 0, 0,0.5) );
+}
+
+.login {
+  width: 5rem;
+  background: transparent;
+  border: 2px solid red;
+  border-radius: 10px;
+  color: gainsboro;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -28,8 +40,14 @@ code {
 
 .teaser {
   width: 100%;
-  height: 500px;
-  margin-bottom: 20px;
-  background-size: cover;
-  background-attachment: fixed;
+  height: 600px;
+  margin-bottom: 60px;
 }
+
+/* .shadow {
+  width: 100%;
+  height: 70px;
+  position: absolute;
+  top: 480px;
+  background-attachment: fixed;
+} */
