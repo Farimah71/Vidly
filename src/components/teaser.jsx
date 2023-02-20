@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import background from "../assets/image/Terminator.avif";
+import Navbar from './navbar';
 
 class Teaser extends Component {
   render() {
@@ -11,7 +12,9 @@ class Teaser extends Component {
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
         }}
-      ></div>
+      >
+        <Navbar />
+      </div>
     );
   }
 }

@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background: black;
+  color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -13,13 +15,14 @@ code {
 }
 
 .navbar {
-  background: linear-gradient(to left,rgba(0, 0, 0,0.5), rgba(255, 0, 0,0.5) );
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(255, 0, 0, 0.5)) !important;
 }
 
 .login {
   width: 5rem;
   background: transparent;
   border: 2px solid red;
+  box-shadow: 0px 0px 10px 3px red;
   border-radius: 10px;
   color: gainsboro;
 }
@@ -43,11 +46,3 @@ code {
   height: 600px;
   margin-bottom: 60px;
 }
-
-/* .shadow {
-  width: 100%;
-  height: 70px;
-  position: absolute;
-  top: 480px;
-  background-attachment: fixed;
-} */

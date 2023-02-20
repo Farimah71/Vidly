@@ -13,10 +13,13 @@ import "./App.css";
 function App() {
   return (
     <React.Fragment>
-      <Navbar />
       <Routes>
         <Route path="/movies" element={<Teaser />} />
+        {["/login", "/movies/:id", "/customers", "/rentals"].map((path) => (
+          <Route key={path} path={path} element={<Navbar />} />
+        ))}
       </Routes>
+
       <main className="container">
         <Routes>
           <Route path="/login" element={<LoginForm />} />
