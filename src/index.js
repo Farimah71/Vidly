@@ -6,7 +6,6 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import "./index.css";
-import Teaser from "./components/teaser";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

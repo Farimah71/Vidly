@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import Input from "./common/input";
+import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 
@@ -14,43 +13,19 @@ class LoginForm extends Form {
     password: Joi.string().required().label("Password"),
   };
 
-  toSubmit = () => {
+  doSubmit = () => {
     //call the server
     console.log("submitted");
   };
 
   render() {
-    const { data, errors } = this.state;
-
     return (
       <>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit} className="col-4">
-          <Input
-            type={"text"}
-            name={"username"}
-            label={"User Name"}
-            value={data.username}
-            onChange={this.handleChange}
-            error={errors.username}
-          />
-
-          <Input
-            type={"password"}
-            name={"password"}
-            label={"Password"}
-            value={data.password}
-            onChange={this.handleChange}
-            error={errors.password}
-          />
-
-          <button
-            disabled={this.validate()}
-            type="submit"
-            className="btn btn-primary"
-          >
-            Login
-          </button>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderButton("Login")}
         </form>
       </>
     );
