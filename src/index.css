@@ -18,7 +18,13 @@ code {
   background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(255, 0, 0, 0.5)) !important;
 }
 
-.login {
+.navbar-text{
+  width: 10.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-user {
   width: 5rem;
   background: transparent;
   border: 2px solid red;

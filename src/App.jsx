@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar";
+import Teaser from "./components/teaser";
 import Movies from "./components/Movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
-import NotFound from "./components/notFound";
 import MoviesForm from "./components/moviesForm";
 import LoginForm from "./components/loginForm";
-import Teaser from "./components/teaser";
+import RegisterForm from "./components/registerForm";
+import NotFound from "./components/notFound";
 import "./App.css";
 
 function App() {
@@ -15,14 +16,17 @@ function App() {
     <React.Fragment>
       <Routes>
         <Route path="/movies" element={<Teaser />} />
-        {["/login", "/movies/:id", "/customers", "/rentals"].map((path) => (
-          <Route key={path} path={path} element={<Navbar />} />
-        ))}
+        {["/login", "register", "/movies/:id", "/customers", "/rentals"].map(
+          (path) => (
+            <Route key={path} path={path} element={<Navbar />} />
+          )
+        )}
       </Routes>
 
       <main className="container">
         <Routes>
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
           <Route path="/movies/:id" element={<MoviesForm />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/customers" element={<Customers />} />

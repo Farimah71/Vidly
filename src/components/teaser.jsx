@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import background from "../assets/image/Terminator.avif";
-import Navbar from './navbar';
+import background from "../assets/image/Terminator.avif"; //Poster of teaser
+import Navbar from "./navbar";
 
 class Teaser extends Component {
   render() {
