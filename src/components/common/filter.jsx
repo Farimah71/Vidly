@@ -15,8 +15,8 @@ const Filter = ({
           onClick={() => onSelectFilter(item)}
           className={
             item === selectedFilter
-              ? "list-group-item list-group-item-action active"
-              : "list-group-item list-group-item-action"
+              ? "list-group-item list-group-item-action list-group-item-light active"
+              : "list-group-item list-group-item-action list-group-item-light"
           }
           style={{
             cursor: "pointer",

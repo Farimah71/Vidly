@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
 import Filter from "./common/filter";
@@ -90,7 +91,13 @@ class Movies extends Component {
             />
           </div>
           <div className="col-8">
-            <p>Showing {totalCount} movies from the database:</p>
+            <div className="d-flex justify-content-between mb-2">
+              <p>Showing {totalCount} movies from the database:</p>
+              <Link className={"btn btn-warning"} to="/movies/new">
+                New Movie
+              </Link>
+            </div>
+
             <div className="card" style={{ overflow: "hidden" }}>
               <MoviesTable
                 movies={movies}

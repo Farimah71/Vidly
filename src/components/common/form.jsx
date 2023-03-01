@@ -46,16 +46,13 @@ class Form extends Component {
     errorDetails.map((item) => {
       errors[item.path[0]] = item.message;
     });
+    // console.log(errors);
     return errors;
   };
 
   renderButton(label) {
     return (
-      <button
-        disabled={this.validate()}
-        type="submit"
-        className="btn btn-primary"
-      >
+      <button disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
     );
@@ -73,6 +70,30 @@ class Form extends Component {
         onChange={this.handleChange}
         error={errors[name]}
       />
+    );
+  }
+
+  renderSelect(id, label, [...options]) {
+    const allOptions = [...options].map((option) => (
+      <option key={option._id} value={option.name}>
+        {option.name}
+      </option>
+    ));
+    console.log(options[0]);
+
+    return (
+      <>
+        <label htmlFor={id}>{label}</label>
+        <select
+          className="form-select form-select-sm"
+          aria-label=".form-select-sm"
+          id={id}
+          name={id}
+          // value={allOptions[0].value}
+        >
+          {[...allOptions]}
+        </select>
+      </>
     );
   }
 }
