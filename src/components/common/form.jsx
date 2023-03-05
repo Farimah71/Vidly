@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Input from "./input";
 import Joi from "joi-browser";
+import Select from "./select";
 
 class Form extends Component {
   state = { data: {}, errors: {} };
 
-  handleInputChange = ({ currentTarget: input }) => {
+  handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -13,18 +14,6 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
-
-    this.setState({ data, errors });
-  };
-
-  handleSelectChange = ({ currentTarget: select }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(select);
-    if (errorMessage) errors[select.name] = errorMessage;
-    else delete errors[select.name];
-
-    const data = { ...this.state.data };
-    data[select.name] = select.value;
 
     this.setState({ data, errors });
   };
@@ -78,37 +67,24 @@ class Form extends Component {
         label={label}
         type={type}
         value={data[name]}
-        onChange={this.handleInputChange}
+        onChange={this.handleChange}
         error={errors[name]}
       />
     );
   }
 
-  renderSelect(name, label, [...options]) {
+  renderSelect(name, label, options) {
     const { data, errors } = this.state;
 
-    const allOptions = [...options].map((option) => (
-      <option key={option._id} value={option.name}>
-        {option.name}
-      </option>
-    ));
-
     return (
-      <>
-        <label htmlFor={name}>{label}</label>
-        <select
-          className="form-select form-select-sm"
-          aria-label=".form-select-sm"
-          id={name}
-          name={name}
-          value={data[name]}
-          onChange={this.handleSelectChange}
-          error={errors[name]}
-        >
-          <option value=""></option>
-          {[...allOptions]}
-        </select>
-      </>
+      <Select
+        name={name}
+        label={label}
+        onChange={this.handleChange}
+        value={data[name]}
+        error={errors[name]}
+        options={options}
+      />
     );
   }
 }

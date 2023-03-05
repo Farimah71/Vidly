@@ -3,7 +3,6 @@ import WithRouter from "../utils/withRouter";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
-import { genres } from './../services/fakeGenreService';
 
 class MoviesForm extends Form {
   state = {
@@ -29,10 +28,9 @@ class MoviesForm extends Form {
     rate: Joi.number().required().min(0).max(10).label("Rate"),
   };
 
-  componentDidMount(){
+  componentDidMount() {
     const genres = [...getGenres()];
-    this.setState({genres});
-    console.log(...this.state.genres);
+    this.setState({ genres });
   }
 
   doSubmit = () => {
@@ -46,7 +44,7 @@ class MoviesForm extends Form {
         <h1>Movie Form </h1>
         <form onSubmit={this.handleSubmit} className="col-3"></form>
         {this.renderInput("title", "Title")}
-        {this.renderSelect("genreId", "Genre", [...this.state.genres])}
+        {this.renderSelect("genreId", "Genre", this.state.genres)}
         {this.renderInput("numberInStock", "Number in Stock", "number")}
         {this.renderInput("rate", "Rate")}
         {this.renderButton("Save")}
