@@ -5,7 +5,7 @@ import Joi from "joi-browser";
 class Form extends Component {
   state = { data: {}, errors: {} };
 
-  handleChange = ({ currentTarget: input }) => {
+  handleInputChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -13,6 +13,18 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
+
+    this.setState({ data, errors });
+  };
+
+  handleSelectChange = ({ currentTarget: select }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(select);
+    if (errorMessage) errors[select.name] = errorMessage;
+    else delete errors[select.name];
+
+    const data = { ...this.state.data };
+    data[select.name] = select.value;
 
     this.setState({ data, errors });
   };
@@ -46,7 +58,6 @@ class Form extends Component {
     errorDetails.map((item) => {
       errors[item.path[0]] = item.message;
     });
-    // console.log(errors);
     return errors;
   };
 
@@ -67,30 +78,34 @@ class Form extends Component {
         label={label}
         type={type}
         value={data[name]}
-        onChange={this.handleChange}
+        onChange={this.handleInputChange}
         error={errors[name]}
       />
     );
   }
 
-  renderSelect(id, label, [...options]) {
+  renderSelect(name, label, [...options]) {
+    const { data, errors } = this.state;
+
     const allOptions = [...options].map((option) => (
       <option key={option._id} value={option.name}>
         {option.name}
       </option>
     ));
-    console.log(options[0]);
 
     return (
       <>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={name}>{label}</label>
         <select
           className="form-select form-select-sm"
           aria-label=".form-select-sm"
-          id={id}
-          name={id}
-          // value={allOptions[0].value}
+          id={name}
+          name={name}
+          value={data[name]}
+          onChange={this.handleSelectChange}
+          error={errors[name]}
         >
+          <option value=""></option>
           {[...allOptions]}
         </select>
       </>
