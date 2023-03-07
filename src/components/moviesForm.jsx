@@ -3,6 +3,7 @@ import WithRouter from "../utils/withRouter";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
+import { getMovie, saveMovie } from "./../services/fakeMovieService";
 
 class MoviesForm extends Form {
   state = {
@@ -31,14 +32,36 @@ class MoviesForm extends Form {
   componentDidMount() {
     const genres = [...getGenres()];
     this.setState({ genres });
+
+    const movieId = this.props.params.id;
+    //Displays an existing movie properties to edit:
+    if (movieId) {
+      const movie = getMovie(movieId);
+      this.setState({ data: this.mapToViewModel(movie) });
+    }
+  }
+
+  mapToViewModel(movie) {
+    return {
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id,
+      numberInStock: movie.numberInStock,
+      rate: movie.dailyRentalRate,
+    };
   }
 
   doSubmit = () => {
     //call the server
+
     console.log("Saved");
   };
 
   render() {
+    //get movie by id
+    //if movie exists, fill inputs with
+    //not exist, save new movie
+
     return (
       <>
         <h1>Movie Form</h1>
