@@ -7,6 +7,7 @@ import MoviesTable from "./moviesTable";
 import Pagination from "./common/Pagination";
 import { Paginate } from "../utils/paginate";
 import _ from "lodash";
+import Search from "./common/searchBox";
 
 class Movies extends Component {
   state = {
@@ -74,7 +75,7 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, genres, sortColumn } = this.state;
 
-    if (count === 0) return <p>There is no movies in the database!</p>;
+    if (count === 0) return <p>There is no movie in the database!</p>;
 
     const { totalCount, data: movies } = this.getPagedData();
 
@@ -93,6 +94,7 @@ class Movies extends Component {
           <div className="col-8">
             <div className="d-flex justify-content-between mb-2">
               <p>Showing {totalCount} movies from the database:</p>
+              <Search />
               <Link className={"btn btn-warning"} to="/movies/new">
                 New Movie
               </Link>
