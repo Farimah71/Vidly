@@ -11,7 +11,7 @@ class MoviesForm extends Form {
       title: "",
       genreId: "",
       numberInStock: "",
-      rate: "",
+      dailyRentalRate: "",
     },
     genres: [],
     errors: {},
@@ -26,19 +26,26 @@ class MoviesForm extends Form {
       .min(0)
       .max(100)
       .label("Number in Stock"),
-    rate: Joi.number().required().min(0).max(10).label("Rate"),
+    dailyRentalRate: Joi.number().required().min(0).max(10).label("Rate"),
   };
 
   componentDidMount() {
+    //Gets genres from the server:
     const genres = [...getGenres()];
     this.setState({ genres });
 
+    //Gets movie by ID from the server:
     const movieId = this.props.params.id;
-    //Displays an existing movie properties to edit:
-    if (movieId) {
-      const movie = getMovie(movieId);
-      this.setState({ data: this.mapToViewModel(movie) });
-    }
+    if (!movieId) return;
+
+    //Invalid movie ID:
+    const movie = getMovie(movieId);
+    if (!movie)
+      return setTimeout(() =>
+        this.props.navigate("/not-found", { replace: true })
+      );
+
+    this.setState({ data: this.mapToViewModel(movie) });
   }
 
   mapToViewModel(movie) {
@@ -47,21 +54,18 @@ class MoviesForm extends Form {
       title: movie.title,
       genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
-      rate: movie.dailyRentalRate,
+      dailyRentalRate: movie.dailyRentalRate,
     };
   }
 
   doSubmit = () => {
     //call the server
-
-    console.log("Saved");
+    const movie = this.state.data;
+    saveMovie(movie);
+    this.props.navigate("/movies");
   };
 
   render() {
-    //get movie by id
-    //if movie exists, fill inputs with
-    //not exist, save new movie
-
     return (
       <>
         <h1>Movie Form</h1>
@@ -69,14 +73,8 @@ class MoviesForm extends Form {
           {this.renderInput("title", "Title")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}
-          {this.renderInput("rate", "Rate")}
+          {this.renderInput("dailyRentalRate", "Rate")}
           {this.renderButton("Save")}
-          {/* <button
-          className="btn btn-primary"
-          onClick={() => this.props.navigate("/movies")}
-        >
-          Save
-        </button> */}
         </form>
       </>
     );
